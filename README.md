@@ -10,7 +10,6 @@ Welcome to my C Programming Practice Repository! This repository contains variou
 - [Prerequisites](#prerequisites)
 - [Usage](#usage)
 - [Contributing](#contributing)
-- [License](#license)
 - [Acknowledgments](#acknowledgments)
 
 ## Introduction
@@ -42,11 +41,11 @@ To compile and run the programs in this repository, you need to have the followi
 
 1. Clone this repository to your local machine:
     ```sh
-    git clone https://github.com/your-username/c-programming-practice.git
+    git clone https://github.com/MikeySharma/c_programming.git
     ```
 2. Navigate to the directory containing the program you want to run:
     ```sh
-    cd c-programming-practice/basics
+    cd c_programming/basics
     ```
 3. Compile the program using `gcc`:
     ```sh
@@ -78,9 +77,6 @@ Contributions are welcome! If you have any improvements or additional programs y
     ```
 5. Open a pull request.
 
-## License
-
-This repository is licensed under the MIT License. See the [LICENSE](LICENSE) file for more information.
 
 ## Acknowledgments
 

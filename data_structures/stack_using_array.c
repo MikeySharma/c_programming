@@ -21,24 +21,69 @@ int isFull(struct Stack *ptr){
     return 0;
 }
 
+int push(struct Stack *ptr, int value){
+    if(isFull(ptr)){
+        printf("Stack Overflow. Can't push %d Value in stack.\n", value);
+        return -1;
+    }else{
+        ptr->top ++;
+        ptr->arr[ptr->top] = value;
+        return ptr->top;
+    }
+}
+
+int pop(struct Stack *ptr){
+    if(isEmpty(ptr)){
+        printf("Stack Underflow.\n");
+        return -1;
+    }else{
+        int value = ptr->arr[ptr->top];
+        ptr->top--;
+        return value;
+    }
+}
+
+int peek(struct Stack *ptr, int i){
+    if((ptr->top - i + i ) <= 0){
+        printf("Not a valid position in the Stack.\n");
+        return -1;
+    }
+    return ptr->arr[ptr->top - i + 1];
+
+}
+
+// void displayArray(struct Stack *arr){
+//     for (int i = 0; i <= arr->top; i++)
+//     {
+//         printf("%d \n",arr->arr[i]);
+//     }
+// }
+
 int main() {
     struct Stack *s = (struct Stack*)malloc(sizeof(struct Stack));
-    s->size = 30;                 
+    s->size = 10;                 
     s->top = -1;
     s->arr = (int *)malloc(s->size * sizeof(int));
+    push(s, 34);
+    push(s, 54);
+    push(s, 54);
+    push(s, 54);
+    push(s, 65);
+    push(s, 64);
+    push(s, 65);
+    // printf("Elements of Stack Are:\n");
+    // displayArray(s);
+    // int popValue = pop(s);
+    // if(popValue >= 0){
+    //     printf("The value %d is poped from Stack.\n", popValue);
+    // }
+    printf("Elements of Stack After pop function.\n");
+    for (int i = 1; i <= s->top + 1; i++)
+    {
+        printf("The element of position %d is %d.\n", i, peek(s, i));
+    }
     
-    if(isEmpty(s)){
-        printf("Array Is Empty.\n");
-    }else {
-        printf("Array isn't Empty.\n");
-    }
-
-    if(isFull(s)){
-        printf("Array is Full.\n");
-    }else{
-        printf("Array is not full.\n");
-    }
-
+    // displayArray(s);
     free(s);
     free(s->arr);
     return 0;

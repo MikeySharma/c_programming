@@ -10,7 +10,7 @@ void circularLinkedListTraversal (struct Node *head){
     struct Node *ptr = head;
     do
     {
-        printf("Element is %d.\n", ptr->data);
+        printf("Element is %d and Address is %u.\n", ptr->data, ptr);
         ptr = ptr->next;
     } while (ptr != head);
     
@@ -30,6 +30,41 @@ struct Node *InsertAtFirst(struct Node *head, int data){
 
     return head;
 
+}
+
+void InsertAtIndex(struct Node *head, int data, int index){
+    struct Node *ptr = (struct Node*)malloc(sizeof(struct Node));
+    ptr->data = data;
+    struct Node *p = head;
+    int i = 0;
+    while(i != (index -1)){
+        p = p->next;
+        i++;
+    }
+    ptr->next = p->next;
+    p->next = ptr;
+}
+
+void InsertAtEnd(struct Node *head, int data){
+    struct Node *ptr = (struct Node*)malloc(sizeof(struct Node));
+    ptr->data = data;
+    struct Node *p = head;
+    do{
+        p = p->next;
+    }while(p->next != head);
+    ptr->next = p->next;
+    p->next = ptr;
+}
+
+void InsertAfterValue(struct Node *head, int data, int value){
+    struct Node *ptr = (struct Node*)malloc(sizeof(struct Node));
+    ptr->data = data;
+    struct Node *p = head;
+    while(p->data != value){
+        p = p->next;
+    }
+    ptr->next = p->next;
+    p->next = ptr;
 }
 
 int main() {
@@ -55,12 +90,31 @@ int main() {
     forth->next = head;
 
     //circularLinkedList Traversal
-    circularLinkedListTraversal(head);
-    printf("Elements After Insertion in Circular Linked List\n");
-    head = InsertAtFirst(head, 54);
-    head = InsertAtFirst(head, 58);
-    circularLinkedListTraversal(head);
+    // circularLinkedListTraversal(head);
+    // printf("Elements After Insertion in Circular Linked List\n");
+    // head = InsertAtFirst(head, 54);
+    // head = InsertAtFirst(head, 58);
+    // circularLinkedListTraversal(head);
+
+    //circular linked list Insertion at index;
+    // circularLinkedListTraversal(head);
+    // printf("Elements After Insertion At Index in Circular Lined List\n");
+    // InsertAtIndex(head, 5, 2);
+    // circularLinkedListTraversal(head);
+
+    //circular Linked List Insertion At End;
+    // circularLinkedListTraversal(head);
+    // printf("Elements After Insertion At End in Circular Linked List\n");
+    // InsertAtEnd(head, 43);
+    // circularLinkedListTraversal(head);
     
+    //circular Linked List Insertion After A Value;
+    circularLinkedListTraversal(head);
+    printf("Elements After Insertion After A value In Circular Linked List\n");
+    InsertAfterValue(head, 43, 6);
+    circularLinkedListTraversal(head);
+
+
     free(head);
     free(second);
     free(third);

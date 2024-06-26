@@ -52,12 +52,28 @@ int peek(struct Stack *ptr, int i){
 
 }
 
-// void displayArray(struct Stack *arr){
-//     for (int i = 0; i <= arr->top; i++)
-//     {
-//         printf("%d \n",arr->arr[i]);
-//     }
-// }
+void displayArray(struct Stack *arr){
+    for (int i = 0; i <= arr->top; i++)
+    {
+        printf("%d \n",arr->arr[i]);
+    }
+}
+
+int stackTop(struct Stack *ptr){
+    if(isEmpty(ptr)){
+        printf("Stack Underflow!");
+        return -1;
+    }
+    return ptr->arr[ptr->top];
+}
+
+int stackBottom(struct Stack *ptr){
+    if(isEmpty(ptr)){
+        printf("Stack Underflow!");
+        return -1;
+    }
+    return ptr->arr[0];
+}
 
 int main() {
     struct Stack *s = (struct Stack*)malloc(sizeof(struct Stack));
@@ -82,6 +98,9 @@ int main() {
     {
         printf("The element of position %d is %d.\n", i, peek(s, i));
     }
+
+    printf("The top Element of The stack is: %d\n", stackTop(s));
+    printf("The Bottom element of the stack is: %d\n", stackBottom(s));
     
     // displayArray(s);
     free(s);

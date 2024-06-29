@@ -1,9 +1,10 @@
 #include <stdio.h>
 
-void displayArray(int arr[],  int size);
+void displayArray(int arr[], int size);
 void delElementAtBeg(int arr[], int size);
 
-int main() {
+int main()
+{
     int arr[100] = {43, 23, 54, 34, 65, 334, 54, 65, 354, 23};
     int size = 10;
     printf("Array Before Deletion of Element At Begining.\n");
@@ -15,7 +16,8 @@ int main() {
     return 0;
 }
 
-void displayArray(int arr[], int size){
+void displayArray(int arr[], int size)
+{
     for (int i = 0; i < size; i++)
     {
         printf("%d ", arr[i]);
@@ -23,7 +25,8 @@ void displayArray(int arr[], int size){
     printf("\n");
 }
 
-void delElementAtBeg(int arr[], int size){
+void delElementAtBeg(int arr[], int size)
+{
     for (int i = 0; i < size - 1; i++)
     {
         arr[i] = arr[i + 1];

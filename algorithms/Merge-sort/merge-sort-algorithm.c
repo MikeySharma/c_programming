@@ -1,59 +1,77 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 void printArray(int *arr, int size){
     for (int i = 0; i < size; i++)
     {
-        printf("%d ", arr[i]);
+       printf("%d ", arr[i]);
     }
     printf("\n");
-    
 }
 
-void MergeSort(int *A, int *B, int *C, int sizeOfA, int sizeOfB){
+void Merge(int *A, int low, int mid, int high){
     int i, j, k;
-    i = j = k = 0;
-    while(i < sizeOfA && j < sizeOfB){
-        // printf("%d \n", A[i]);
-        // printf("%d \n", B[j]);
-        if(A[i] < B[j]){
-            C[k] = A[i];
+    int *B = (int *)malloc((high - low + 1) * sizeof(int));
+    if (B == NULL) {
+        printf("Memory allocation failed\n");
+        return;
+    }
+
+    i = low;
+    j = mid + 1;
+    k = 0;
+
+    while(i <= mid && j <= high){
+        if(A[i] < A[j]){
+            B[k] = A[i];
             i++;
-        }else{
-            C[k] = B[j];
+        } else {
+            B[k] = A[j];
             j++;
         }
         k++;
     }
-    while(i < sizeOfA){
-        C[k] = A[i];
-        i++;
+
+    while(i <= mid){
+        B[k] = A[i];
+        i++; 
         k++;
     }
-    while(j < sizeOfB){
-        C[k] = B[j];
-        j++;
+
+    while(j <= high){
+        B[k] = A[j];
+        j++; 
         k++;
+    }
+
+    for (i = low, k = 0; i <= high; i++, k++){
+        A[i] = B[k];
+    }
+
+    free(B);
+}
+
+void MergeSort(int *A, int low, int high){
+    if(low < high){
+        int mid = (low + high) / 2;
+        MergeSort(A, low, mid);
+        MergeSort(A, mid + 1, high);
+        Merge(A, low, mid, high);
     }
 }
 
 int main() {
-    int A[] = {2, 3, 4, 6, 7, 8};
-    int sizeOfA = sizeof(A) / sizeof(A[0]);
-    int B[] = {5, 8, 82, 234, 345};
-    int sizeOfB = sizeof(B) /sizeof(B[0]);
-    int sizeOfC = sizeOfA + sizeOfB;
-    int C[sizeOfC];
+    // int A[] = {12, 43, 54, 234, 54, 235};
+    int A[] = {4,  234, 545, 234, 23, 43, 1, 4, 2346, 93};
+    int size = sizeof(A) / sizeof(A[0]);
 
-    MergeSort(A, B, C, sizeOfA, sizeOfB);
+    printf("Original Array: \n");
+    printArray(A, size);
 
-    printf("Array A is:\n");
-    printArray(A, sizeOfA);
+    MergeSort(A, 0, size - 1);
 
-    printf("Array B is: \n");
-    printArray(B, sizeOfB);
-
-    printf("Array C is: \n");
-    printArray(C, sizeOfC);
+    printf("Sorted Array: \n");
+    printArray(A, size);
 
     return 0;
 }

@@ -38,28 +38,42 @@ void inOrderTraversal(struct Node *root){
     }
 }
 
-void deletion(struct Node *root, int key){
-    struct Node *prev = NULL;
-   while (root != NULL && root->data != key)
-   {
-        prev = root;
-        if(key < root->data){
-            root = root->left;
-        }else{
-            root = root->right;
-        }
-   }
+struct Node *minValueNode(struct Node *root){
+    struct Node *current = root;
+    while(current && current->left != NULL){
+        current = current->left;
+    }
+    return current;
+}
 
-   if(root == NULL){
-    printf("\nKey %d Not Found in BST.\n", key);
-    exit(-1);
-   }
-   if(key < prev->data){
-    prev->left = NULL;
-   }else{
-    prev->right = NULL;
-   }
-   free(root);
+struct Node *deleteNode(struct Node *root, int value){
+    if(root == NULL){
+        return NULL;
+    }
+    //recur down the tree
+    if(value < root->data){
+        root->left = deleteNode(root->left, value);
+    }else if(value > root->data){
+        root->right = deleteNode(root->right, value);
+    }else{
+        //Node With only one child or no child
+        if(root->left == NULL){
+            struct Node *temp = root->right;
+            free(root);
+            return temp;
+        }else if(root->right == NULL){
+            struct Node *temp = root->left;
+            free(root);
+            return temp;
+        }
+
+        struct Node *temp = minValueNode(root->right);
+        root->data = temp->data;
+
+        root->right = deleteNode(root->right, temp->data);
+    }
+
+    return root;
 }
 
 int main() {
@@ -83,12 +97,11 @@ int main() {
     printf("Original Binary Search Tree: \n");
     inOrderTraversal(root);
 
-    deletion(root, 11);
-    deletion(root, 6);
+    deleteNode(root, 10);
 
     printf("\nBinary Search Tree After Deletion: \n");
     inOrderTraversal(root);
-
+    
     free(root);
     free(child1);
     free(child2);

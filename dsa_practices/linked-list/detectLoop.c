@@ -55,7 +55,7 @@ int main() {
     head->next->next->next = createNode(4);
 
     // Creating a loop for testing: 4 -> 2
-    // head->next->next->next->next = head->next;
+    head->next->next->next->next = head->next;
 
     
 
